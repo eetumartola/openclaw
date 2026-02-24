@@ -1,0 +1,7 @@
+{
+  "gateway": {
+    "controlUi": {
+      "allowedOrigins": ["${RENDER_EXTERNAL_URL}"]
+    }
+  }
+}
