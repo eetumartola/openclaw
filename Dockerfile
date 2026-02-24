@@ -22,6 +22,8 @@ COPY --chown=node:node ui/package.json ./ui/package.json
 COPY --chown=node:node patches ./patches
 COPY --chown=node:node scripts ./scripts
 
+COPY openclaw.render.json /app/openclaw.render.json
+
 USER node
 RUN pnpm install --frozen-lockfile
 
