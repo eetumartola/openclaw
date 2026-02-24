@@ -9,14 +9,14 @@ services:
         set -eu
         mkdir -p "$OPENCLAW_STATE_DIR"
         cat > "$OPENCLAW_STATE_DIR/openclaw.json" <<EOF
-    {
-      "gateway": {
-        "controlUi": {
-          "allowedOrigins": ["$RENDER_EXTERNAL_URL"]
+        {
+          "gateway": {
+            "controlUi": {
+              "allowedOrigins": ["$RENDER_EXTERNAL_URL"]
+            }
+          }
         }
-      }
-    }
-    EOF
+        EOF
         exec node openclaw.mjs gateway --allow-unconfigured --bind lan --port "$PORT"
       '
     envVars:
