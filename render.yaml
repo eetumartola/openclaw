@@ -4,7 +4,24 @@ services:
     runtime: docker
     plan: standard
     healthCheckPath: /health
-    dockerCommand: node openclaw.mjs gateway --allow-unconfigured --bind lan --port $PORT
+    dockerCommand: >
+      sh -lc '
+        set -eu
+        mkdir -p "$OPENCLAW_STATE_DIR"
+        CONFIG="$OPENCLAW_STATE_DIR/openclaw.json"
+        if [ ! -f "$CONFIG" ]; then
+          cat > "$CONFIG" <<EOF
+          {
+            gateway: {
+              controlUi: {
+                allowedOrigins: ["$RENDER_EXTERNAL_URL"]
+              }
+            }
+          }
+          EOF
+        fi
+        node openclaw.mjs gateway --allow-unconfigured --bind lan --port "$PORT"
+      '
     envVars:
       - key: SETUP_PASSWORD
         sync: false
