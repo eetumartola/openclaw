@@ -17,7 +17,7 @@ services:
           fs.writeFileSync(cfg, JSON.stringify(obj,null,2));
         }
       ";
-  exec node openclaw.mjs gateway --allow-unconfigured --bind lan --port \"$PORT\"'
+      exec node openclaw.mjs gateway --allow-unconfigured --bind lan --port \"$PORT\"'
     envVars:
       - key: SETUP_PASSWORD
         sync: false
