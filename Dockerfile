@@ -57,8 +57,7 @@ ENV NODE_ENV=production
 USER node
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["sh", "/entrypoint.sh"]
 
 # Start gateway server with default config.
 # Binds to loopback (127.0.0.1) by default for security.
