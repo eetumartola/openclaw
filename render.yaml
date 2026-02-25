@@ -5,10 +5,9 @@ services:
     plan: standard
     healthCheckPath: /health
 
-    # No sh -lc, no quoting wars:
-    dockerCommand: node openclaw.mjs gateway --allow-unconfigured --bind lan
-
     envVars:
+      - key: PORT
+        value: "8080"
       - key: SETUP_PASSWORD
         sync: false
       - key: OPENCLAW_STATE_DIR
@@ -18,11 +17,9 @@ services:
       - key: OPENCLAW_GATEWAY_TOKEN
         generateValue: true
 
-      # The important bits:
+      # IMPORTANT: tell OpenClaw to look for a writable config file on the disk
       - key: OPENCLAW_CONFIG_PATH
-        value: /app/openclaw.render.json
-      - key: OPENCLAW_GATEWAY_PORT
-        value: "8080"
+        value: /data/.openclaw/openclaw.json
 
     disk:
       name: openclaw-data
